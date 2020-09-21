@@ -14,7 +14,7 @@
 [ext_resource path="res://assets/fonts/yoster.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://scripts/EndScreen.gd" type="Script" id=13]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform float speed_scale = 0.0;
@@ -24,11 +24,11 @@ void fragment() {
 }"
 custom_defines = ""
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/speed_scale = 0.0
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=3]
 resource_name = "die"
 length = 3.0
 tracks/0/type = "value"
@@ -56,7 +56,7 @@ tracks/1/keys = {
 "values": [ 0.0, -9.4, -28.1, -46.8 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=4]
 resource_name = "end"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -71,8 +71,7 @@ tracks/0/keys = {
 "values": [ Vector2( 629.121, 418.294 ), Vector2( 1400, 418.294 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "glide"
+[sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -87,16 +86,15 @@ tracks/0/keys = {
 "values": [ Vector2( 630, 418 ), Vector2( 630, 416 ), Vector2( 630, 416 ), Vector2( 630, 418 ) ]
 }
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 9 )
 region = Rect2( -1.2185, 73.3979, 518.476, 15.9136 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 9 )
 region = Rect2( 7, 101, 9, 26 )
 
-[sub_resource type="Animation" id=6]
-resource_name = "slide"
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("MarginContainer/TextureRect/Slider:anchor_left")
 tracks/0/interp = 1
@@ -110,7 +108,7 @@ tracks/0/keys = {
 "values": [ 0.015, 0.968 ]
 }
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 9 )
 region = Rect2( 12, 3, 148, 38 )
 
@@ -154,7 +152,7 @@ anchor_mode = 0
 current = true
 
 [node name="Bg" type="Sprite" parent="."]
-material = SubResource( 1 )
+material = SubResource( 2 )
 position = Vector2( 585.925, 110.001 )
 texture = ExtResource( 2 )
 
@@ -169,9 +167,9 @@ captains_scn = ExtResource( 4 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Ship"]
 pause_mode = 2
 playback_speed = 0.35
-anims/die = SubResource( 8 )
-anims/end = SubResource( 9 )
-anims/glide = SubResource( 2 )
+anims/die = SubResource( 3 )
+anims/end = SubResource( 4 )
+anims/glide = SubResource( 5 )
 
 [node name="SpawnCtrl" type="Node2D" parent="."]
 script = ExtResource( 10 )
@@ -231,7 +229,7 @@ margin_right = 518.0
 margin_bottom = 35.0
 grow_horizontal = 2
 size_flags_vertical = 5
-texture = SubResource( 4 )
+texture = SubResource( 6 )
 
 [node name="Slider" type="TextureRect" parent="CanvasLayer/FlyProgress/MarginContainer/TextureRect"]
 anchor_left = 0.015
@@ -244,14 +242,14 @@ margin_right = 518.0
 margin_bottom = 24.0
 grow_vertical = 2
 size_flags_vertical = 3
-texture = SubResource( 5 )
+texture = SubResource( 7 )
 stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/FlyProgress"]
-anims/slide = SubResource( 6 )
+anims/slide = SubResource( 8 )
 
 [node name="ShipGui" type="MarginContainer" parent="CanvasLayer"]
 anchor_left = 0.827
@@ -275,7 +273,7 @@ ship = NodePath("../../Ship")
 margin_top = 60.0
 margin_right = 148.0
 margin_bottom = 98.0
-texture = SubResource( 7 )
+texture = SubResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ShipGui"]
 margin_top = 60.0
@@ -332,6 +330,7 @@ custom_colors/font_color = Color( 0.486275, 0.247059, 0.345098, 1 )
 align = 1
 
 [node name="Button" type="Button" parent="CanvasLayer/EndScreen/CenterContainer/VBoxContainer"]
+pause_mode = 2
 margin_top = 63.0
 margin_right = 107.0
 margin_bottom = 87.0

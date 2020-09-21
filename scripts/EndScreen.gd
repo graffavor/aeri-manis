@@ -26,6 +26,5 @@ func show_end_screen():
 
 
 func _on_Button_pressed():
-	# todo: switch scene
-	pass
+	get_tree().change_scene("res://scenes/Menu.tscn")
 

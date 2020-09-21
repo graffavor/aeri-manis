@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/alexander-nakarada-now-we-ride.ogg-a8956922d0bfbc046c41b70d58c43207.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/alexander-nakarada-now-we-ride.ogg"
+dest_files=[ "res://.import/alexander-nakarada-now-we-ride.ogg-a8956922d0bfbc046c41b70d58c43207.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

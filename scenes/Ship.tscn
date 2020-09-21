@@ -1,0 +1,148 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/propeller.png" type="Texture" id=1]
+[ext_resource path="res://assets/ship.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Ship.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Cannon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sounds/Explosion4.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/HitMark.tscn" type="PackedScene" id=6]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 80, 0, 40, 40 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "spin",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 22.8183, 10 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 298.296, 66.567 )
+
+[node name="Ship" type="Node2D"]
+position = Vector2( 0.420471, 0 )
+script = ExtResource( 3 )
+
+[node name="Back" type="Node2D" parent="."]
+
+[node name="Deck" type="Sprite" parent="Back"]
+position = Vector2( 0, 1 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 10.3018, 2.52223, 642.199, 74.2186 )
+
+[node name="Straps" type="Sprite" parent="Back"]
+position = Vector2( -7, -80 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 7.8028, 548.977, 598.865, 103.189 )
+
+[node name="Baloon" type="Sprite" parent="Back"]
+position = Vector2( -12, -190 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 25.8908, 240.472, 581.309, 178.926 )
+
+[node name="PropHolder" type="Sprite" parent="Back"]
+position = Vector2( -183.569, 76.7929 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 11.8188, 822.674, 13.4339, 29.2601 )
+
+[node name="Propeller" type="AnimatedSprite" parent="Back"]
+position = Vector2( -189.945, 86.8597 )
+frames = SubResource( 4 )
+
+[node name="BackCannon" parent="." instance=ExtResource( 4 )]
+position = Vector2( -306.221, -14.8651 )
+flipped = true
+
+[node name="SpawnPosition" type="Position2D" parent="."]
+
+[node name="HitMarks" type="Node2D" parent="."]
+
+[node name="HitMark" parent="HitMarks" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 137.5, 3 )
+
+[node name="HitMark2" parent="HitMarks" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 28.5, 17.5 )
+
+[node name="HitMark3" parent="HitMarks" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( -41, -0.5 )
+
+[node name="HitMark4" parent="HitMarks" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( -159.5, 19 )
+
+[node name="HitMark5" parent="HitMarks" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( -233.5, 0.5 )
+
+[node name="Front" type="Node2D" parent="."]
+
+[node name="Deck" type="Sprite" parent="Front"]
+position = Vector2( -15, 44 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 10.6324, 79.7201, 612.33, 135.17 )
+
+[node name="Straps" type="Sprite" parent="Front"]
+position = Vector2( -9, -54 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 9.4076, 663.339, 620.81, 151.861 )
+
+[node name="NamePlate" type="Sprite" parent="Front"]
+position = Vector2( -0.707153, 55.8615 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 7, 225, 78, 15 )
+
+[node name="Cannon" parent="." instance=ExtResource( 4 )]
+position = Vector2( 256.274, -17.8381 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( -300.951, -20.1571, 261.608, -18.0548, 253.62, 0.0244293, 209.473, 32.3989, 194.337, 34.9216, -275.304, 34.0807, -287.918, 23.5695, -312.304, 24.4104, -319.451, 24.4104, -313.144, 46.6942, 209.052, 48.7964, 260.767, 11.3765, 275.063, -28.1456, 90.9062, -29.4069, -131.931, -28.566, -308.099, -32.7705, -319.451, 23.5695, -312.724, 25.2513 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( -89.4878, 5.35143 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource( 5 )
+
+[node name="HitCollider" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitCollider"]
+position = Vector2( -14.1422, 36.0624 )
+shape = SubResource( 6 )
+
+[node name="HitAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -8.0
+[connection signal="body_entered" from="HitCollider" to="." method="_on_HitCollider_body_entered"]

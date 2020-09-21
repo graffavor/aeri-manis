@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/CannonShoot.wav-03e8fb5c6c310db065d2ffe0f1ed78bd.sample"
+
+[deps]
+
+source_file="res://assets/sounds/CannonShoot.wav"
+dest_files=[ "res://.import/CannonShoot.wav-03e8fb5c6c310db065d2ffe0f1ed78bd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

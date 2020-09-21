@@ -1,0 +1,229 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://assets/background.png" type="Texture" id=1]
+[ext_resource path="res://resources/city_front.tres" type="Texture" id=2]
+[ext_resource path="res://resources/city_back.tres" type="Texture" id=3]
+[ext_resource path="res://resources/city_barrels.tres" type="Texture" id=4]
+[ext_resource path="res://assets/trader.png" type="Texture" id=5]
+[ext_resource path="res://scenes/Captain.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Worker.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Ship.tscn" type="PackedScene" id=8]
+[ext_resource path="res://resources/city_trap.tres" type="Texture" id=9]
+[ext_resource path="res://scripts/Tutorial/WorkerPath.gd" type="Script" id=10]
+[ext_resource path="res://assets/sun.png" type="Texture" id=11]
+[ext_resource path="res://resources/city_barrels2.tres" type="Texture" id=12]
+[ext_resource path="res://resources/cutscene_worker_path1.tres" type="Curve2D" id=13]
+[ext_resource path="res://resources/cutscene_worker_path2.tres" type="Curve2D" id=14]
+[ext_resource path="res://scenes/DialogUI.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scripts/StartCutscene.gd" type="Script" id=16]
+[ext_resource path="res://assets/sounds/alexander-nakarada-the-road-home.ogg" type="AudioStream" id=17]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 314.817, 565.499, 0, 0, 0, 0, 386.736, 572.991, 0, 0, 0, 0, 450.975, 573.74, 0, 0, 0, 0, 463.711, 522.423, 0, 0, 0, 0, 388.796, 516.43 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "to_ship"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Captain:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01, 0.71 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 1, 1 ), Vector2( -1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:unit_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "move"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "final"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/Curtain:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3.2, 3.9, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.976471, 0.847059, 0.631373, 0 ), Color( 0.976471, 0.847059, 0.631373, 0 ), Color( 0.976471, 0.847059, 0.631373, 1 ), Color( 0.976471, 0.847059, 0.631373, 1 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("City/Ship:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 594.475, -0.25, 0, 0.195267, 8.40277, 670.413, -0.405915, -60.105, 0.27535, 36.486, 1018.7, -0.473563, -185.488, 0.411646, 186.016, 1947.46, -0.676123, -438.111, 0.235122, 401.488 ),
+"times": PoolRealArray( 0, 1.2, 2.5, 4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("City/Ship:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 516.879, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/Curtain:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.976471, 0.847059, 0.631373, 1 ), Color( 0.976471, 0.847059, 0.631373, 0 ) ]
+}
+
+[node name="Cutscene" type="Node2D"]
+script = ExtResource( 16 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
+[node name="Bg" type="Sprite" parent="."]
+position = Vector2( 699.371, -0.0385742 )
+texture = ExtResource( 1 )
+
+[node name="Sun" type="Sprite" parent="."]
+position = Vector2( 1159.34, 112.974 )
+texture = ExtResource( 11 )
+
+[node name="City" type="Node2D" parent="."]
+
+[node name="Back" type="Sprite" parent="City"]
+position = Vector2( -0.337097, 176.533 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Ship" parent="City" instance=ExtResource( 8 )]
+position = Vector2( 594.475, 516.879 )
+spawn_captain = false
+
+[node name="Front" type="Sprite" parent="City"]
+position = Vector2( 483, 639 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -0.5 )
+
+[node name="Trap" type="Sprite" parent="City"]
+position = Vector2( 457.397, 547.288 )
+scale = Vector2( 1.4, 1.4 )
+texture = ExtResource( 9 )
+
+[node name="YSort" type="YSort" parent="City"]
+
+[node name="Props" type="Node2D" parent="City/YSort"]
+
+[node name="Barrels" type="Sprite" parent="City/YSort/Props"]
+position = Vector2( 259.638, 518.276 )
+texture = ExtResource( 4 )
+
+[node name="Barrels2" type="Sprite" parent="City/YSort/Props"]
+position = Vector2( 651.245, 567.1 )
+texture = ExtResource( 12 )
+
+[node name="Characters" type="Node2D" parent="City/YSort"]
+
+[node name="Trader" type="Node2D" parent="City/YSort/Characters"]
+
+[node name="Sprite" type="Sprite" parent="City/YSort/Characters/Trader"]
+position = Vector2( 291.332, 550.972 )
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="CaptainToShip" type="Path2D" parent="City/YSort/Characters"]
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="City/YSort/Characters/CaptainToShip"]
+position = Vector2( 314.817, 565.499 )
+rotate = false
+loop = false
+
+[node name="Captain" parent="City/YSort/Characters/CaptainToShip/PathFollow2D" instance=ExtResource( 6 )]
+is_player_controlled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="City/YSort/Characters/CaptainToShip/PathFollow2D"]
+playback_speed = 0.1
+anims/to_ship = SubResource( 2 )
+
+[node name="WorkerPath" type="Path2D" parent="City"]
+curve = ExtResource( 13 )
+script = ExtResource( 10 )
+default_path = ExtResource( 13 )
+final_path = ExtResource( 14 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="City/WorkerPath"]
+position = Vector2( 619.094, 573.407 )
+rotate = false
+cubic_interp = false
+loop = false
+
+[node name="Worker" parent="City/WorkerPath/PathFollow2D" instance=ExtResource( 7 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="City/WorkerPath/PathFollow2D"]
+playback_speed = 0.2
+anims/move = SubResource( 3 )
+
+[node name="FinalPlayer" type="AnimationPlayer" parent="."]
+anims/final = SubResource( 4 )
+anims/start = SubResource( 5 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Curtain" type="ColorRect" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.976471, 0.847059, 0.631373, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogUI" parent="UI" instance=ExtResource( 15 )]
+visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -24.0
+autoplay = true

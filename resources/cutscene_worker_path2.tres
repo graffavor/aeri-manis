@@ -1,0 +1,6 @@
+[gd_resource type="Curve2D" format=2]
+
+[resource]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 290.592, 578.093, 0, 0, 0, 0, 449.027, 578.408, 0, 0, 0, 0, 466.666, 522.656, 0, 0, 0, 0, 481.271, 521.682 )
+}
